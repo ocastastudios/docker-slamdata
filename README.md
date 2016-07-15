@@ -2,10 +2,16 @@
 
 Builds a Docker image for the [SlamData](http://slamdata.com)  NOSQL analytics Tool (Community Edition). 
 
-Contains a basic config that links in a MongoDB database with the connection string _mongodb://mongo:27017_
-and expose the Slamdata web server on port 8080. 
+There are three environment variables that can be used to configure the image.
 
-If you make sure to link your MongoDB container with a name of _mongo_ it should just work
+__PORT__
+The TCP port that the SlamData server is available on. Defaults to _8080_
+
+__CONNECTION_NAME__
+The name of the preconfigured SlamData MongoDB connection. Defaults to _MongoDB_
+
+__CONNECTION_URI__
+The MongoDB connection string to be used for the initial connection. Defaults to _mongodb://mongodb:27017_
 
 This is not an official image.
 
