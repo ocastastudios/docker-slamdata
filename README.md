@@ -15,3 +15,7 @@ The MongoDB connection string to be used for the initial connection. Defaults to
 
 This is not an official image.
 
+# Supported tags
+
+* `latest`, `3.0` The most recent version of SlamData Community Edition v3.0
+* `3.0.x` Specific versions of SlamData Community Edition v3.0
