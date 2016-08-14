@@ -5,7 +5,7 @@ ADD run.sh /run.sh
 RUN apt-get update && apt-get -y install npm && npm install bower -g && \
     wget -q https://nodejs.org/dist/v4.4.4/node-v4.4.4-linux-x64.tar.xz && \
     tar -C /usr/local --strip-components 1 -xJf node-v4.4.4-linux-x64.tar.xz && \
-    wget -q -O slamdata.tar.gz https://github.com/slamdata/slamdata/archive/v3.0.6.tar.gz && \
+    wget -q -O slamdata.tar.gz https://github.com/slamdata/slamdata/archive/v3.0.7.tar.gz && \
     mkdir slamdata && tar -xzf  slamdata.tar.gz -C slamdata --strip-components=1 && \
     rm slamdata.tar.gz && rm node-v4.4.4-linux-x64.tar.xz && cd slamdata && \
     bower --allow-root install && npm install && npm run build && \
