@@ -14,6 +14,7 @@ RUN apt-get update && apt-get -y install npm && npm install bower -g && \
     apt-get -y remove npm && apt-get -y autoremove && apt-get clean && \
     mkdir -p /root/.config/quasar/ && \
     wget -O quasar.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-web/quasar-web_2.11-${QUASAR_VERSION}-one-jar.jar && \
+    wget -O quasar-repl.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-repl/quasar-repl_2.11-${QUASAR_VERSION}-one-jar.jar && \
     chmod a+x /run.sh
 
 CMD . /run.sh

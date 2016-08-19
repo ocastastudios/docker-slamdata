@@ -15,6 +15,13 @@ The MongoDB connection string to be used for the initial connection. Defaults to
 
 This is not an official image.
 
+# Quasar REPL
+
+The Quasar REPL jar file is included in the image although not required by Slamdata as it's so darn useful
+You can fire up REPL in a running container using the same configuration as Slamdata. e.g.
+
+    docker exec -it slamdata_container bash -c "java -jar slamdata/quasar-repl-assembly.jar -c /root/.config/quasar/quasar-config.json"
+    
 # Supported tags
 
 * `latest`, `3.0` The most recent version of SlamData Community Edition v3.0
