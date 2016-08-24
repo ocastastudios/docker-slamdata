@@ -1,8 +1,8 @@
 FROM java:openjdk-8
 MAINTAINER "Ocasta Studios <info@ocasta.com>"
 
-ENV QUASAR_VERSION="11.0.10"
-ENV SLAM_VERSION="3.0.8"
+ENV QUASAR_VERSION="11.4.10"
+ENV SLAM_VERSION="3.0.9"
 ADD run.sh /run.sh
 RUN apt-get update && apt-get -y install npm && npm install bower -g && \
     wget -q https://nodejs.org/dist/v4.4.4/node-v4.4.4-linux-x64.tar.xz && \
@@ -13,8 +13,8 @@ RUN apt-get update && apt-get -y install npm && npm install bower -g && \
     bower --allow-root install &&  npm install && npm run build && \
     apt-get -y remove npm && apt-get -y autoremove && apt-get clean && \
     mkdir -p /root/.config/quasar/ && \
-    wget -O quasar.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-web/quasar-web_2.11-${QUASAR_VERSION}-one-jar.jar && \
-    wget -O quasar-repl.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-repl/quasar-repl_2.11-${QUASAR_VERSION}-one-jar.jar && \
+    wget -O quasar.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-web/quasar-web-assembly-${QUASAR_VERSION}.jar && \
+    wget -O quasar-repl.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-repl/quasar-repl-assembly-${QUASAR_VERSION}.jar && \
     chmod a+x /run.sh
 ADD js/iframeResizer.contentWindow.min.js /slamdata/public/js/iframeResizer.contentWindow.min.js
 ADD workspace.html /slamdata/public/workspace.html
