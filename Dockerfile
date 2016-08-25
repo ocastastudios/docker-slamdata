@@ -1,8 +1,8 @@
 FROM java:openjdk-8
 MAINTAINER "Ocasta Studios <info@ocasta.com>"
 
-ENV QUASAR_VERSION="11.4.10"
-ENV SLAM_VERSION="3.0.9"
+ENV QUASAR_VERSION="11.4.13"
+ENV SLAM_VERSION="3.0.10"
 ADD run.sh /run.sh
 RUN apt-get update && apt-get -y install npm && npm install bower -g && \
     wget -q https://nodejs.org/dist/v4.4.4/node-v4.4.4-linux-x64.tar.xz && \
