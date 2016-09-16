@@ -15,6 +15,36 @@ The MongoDB connection string to be used for the initial connection. Defaults to
 
 This is not an official image.
 
+
+# Run SlamData
+
+```bash
+docker run -d \
+           -e CONNECTION_NAME="my_connection_name" \
+           -e CONNECTION_URI="mongodb://user:pass@mongo:27017/admin" \
+           -p 0.0.0.0:80:8080 \
+           ocasta/slamdata
+```
+
+## Run it preserving quasar config data 
+
+Preserve quasar configuration and data by mounting the destination dir `/root/.config/quasar` from your host, data container...
+
+Example: 
+
+Create the dir `/root/slamdata/` in your host and run the container:
+
+ ```bash
+docker run -d \
+           -e CONNECTION_NAME="my_connection_name" \
+           -e CONNECTION_URI="mongodb://user:pass@mongo:27017/admin" \
+           -v /root/slamdata:/root/.config/quasar
+           -p 0.0.0.0:80:8080 \
+           ocasta/slamdata
+```
+
+
+
 # Quasar REPL
 
 The Quasar REPL jar file is included in the image although not required by Slamdata as it's so darn useful
@@ -26,3 +56,4 @@ You can fire up REPL in a running container using the same configuration as Slam
 
 * `latest`, `3.0` The most recent version of SlamData Community Edition v3.0
 * `3.0.x` Specific versions of SlamData Community Edition v3.0
+
