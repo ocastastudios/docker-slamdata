@@ -43,7 +43,32 @@ docker run -d \
            ocasta/slamdata
 ```
 
+## Running Slam Advanced Edition
 
+For obvious reasons, this image does not contain the necessary Quasar file to run Slamdata Advanced Edition. However
+if you have paid for the Advanced edition it is possible to run it with this image. 
+
+- First download and unzip the Slamdata Advanced edition installer
+- Make sure the quasar.jar file from this to somewhere the docker container will be able to access it
+- Create a quasar config file with the OIDC provider configuration as in the Slamdata documentation
+- Run the docker container as follows. Assuming the _quasar-config.json_ is in _/root/slamdata_ and Slamdata Advanced was 
+  unzipped in _/slamdata-advanced_ the docker command would be:
+
+ ```bash
+docker run -d \
+           -e ADMIN_GROUP="myAdminGroup" \
+           -e ADMIN_USERS="adminuser1@myodic.com,adminuser2@myoidc.com" \
+           -e SD_OPTS="-D..." |
+           -v /root/slamdata:/root/.config/quasar |
+           -v /slamdata-advanced:/slamdata |
+           -p 0.0.0.0:80:8080 \
+           ocasta/slamdata run-advanced.sh
+```
+
+where _SD_OPTS_ is the Advanced edition licence parameters detailed in the Slam Documentation.
+
+This will also write the H2 metastore to the /root/slamdata directory thus ensuring its continued existence between 
+ container updates.
 
 # Quasar REPL
 
