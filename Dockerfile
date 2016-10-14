@@ -16,9 +16,9 @@ RUN apt-get update && apt-get -y install npm && npm install bower -g && \
     mkdir -p /root/.config/quasar/ && \
     wget -O quasar.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-web/quasar-web-assembly-${QUASAR_VERSION}.jar && \
     wget -O quasar-repl.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-repl/quasar-repl-assembly-${QUASAR_VERSION}.jar && \
-    chmod a+x /run.sh
-ADD js/iframeResizer.contentWindow.min.js /slamdata/public/js/iframeResizer.contentWindow.min.js
-ADD workspace.html /slamdata/public/workspace.html
     chmod a+x /run.sh && chmod a+x /run-advanced.sh
 
+ADD js/iframeResizer.contentWindow.min.js /slamdata/public/js/iframeResizer.contentWindow.min.js
+ADD workspace.html /slamdata/public/workspace.html
+   
 CMD . /run.sh
