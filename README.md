@@ -45,8 +45,8 @@ docker run -d \
 
 ## Running Slam Advanced Edition
 
-For obvious reasons, this image does not contain the necessary Quasar file to run Slamdata Advanced Edition. However
-if you have paid for the Advanced edition it is possible to run it with this image. 
+For obvious reasons, this image does not contain the necessary Quasar file to run Slamdata Advanced Edition. 
+However if you have paid for the Advanced edition it is possible to run it with this image. 
 
 - First download and unzip the Slamdata Advanced edition installer
 - Make sure the quasar.jar file from this to somewhere the docker container will be able to access it
@@ -65,7 +65,7 @@ docker run -d \
            ocasta/slamdata run-advanced.sh
 ```
 
-where _SD_OPTS_ is the Advanced edition licence parameters detailed in the Slam Documentation.
+where *SD_OPTS* is the Advanced edition licence parameters detailed in the Slam Documentation.
 
 This will also write the H2 metastore to the /root/slamdata directory thus ensuring its continued existence between 
  container updates.
@@ -79,6 +79,7 @@ You can fire up REPL in a running container using the same configuration as Slam
     
 # Supported tags
 
-* `latest`, `3.0` The most recent version of SlamData Community Edition v3.0
+* `latest`,`4.0` The most recent version of SlamData Community Edition v4.0
 * `3.0.x` Specific versions of SlamData Community Edition v3.0
+* `4.0.x` Specific versions of SlamData Community Edition v4.0
 
