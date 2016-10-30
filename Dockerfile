@@ -1,8 +1,8 @@
 FROM java:openjdk-8
 MAINTAINER "Ocasta Studios <info@ocasta.com>"
 
-ENV QUASAR_VERSION="13.0.5"
-ENV SLAM_VERSION="4.0.1"
+ENV QUASAR_VERSION="13.0.14"
+ENV SLAM_VERSION="4.0.2"
 ADD run.sh /run.sh
 ADD run-advanced.sh /run-advanced.sh
 RUN apt-get update && apt-get upgrade -y && \
@@ -16,6 +16,6 @@ RUN apt-get update && apt-get upgrade -y && \
     mkdir -p /root/.config/quasar/ && \
     wget -O quasar.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-web/quasar-web-assembly-${QUASAR_VERSION}.jar && \
     wget -O quasar-repl.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-repl/quasar-repl-assembly-${QUASAR_VERSION}.jar && \
-    chmod a+x /run.sh && chmod a+x /run-advanced.sh
+   chmod a+x /run.sh && chmod a+x /run-advanced.sh
 
 CMD . /run.sh
