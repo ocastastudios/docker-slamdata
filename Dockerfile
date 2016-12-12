@@ -2,7 +2,7 @@ FROM java:openjdk-8
 MAINTAINER "Ocasta Studios <info@ocasta.com>"
 
 ENV QUASAR_VERSION="13.0.42"
-ENV SLAM_VERSION="4.0.6"
+ENV SLAM_VERSION="4.0.9"
 ADD run.sh /run.sh
 ADD run-advanced.sh /run-advanced.sh
 RUN apt-get update && apt-get upgrade -y && \
