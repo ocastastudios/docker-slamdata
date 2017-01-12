@@ -2,6 +2,34 @@
 
 set -e
 
+if [ ! -e /root/.config/quasar/quasar-config.json ]; then
+
+    echo >&2 'info: create quasar-config.json'
+
+    PORT="${PORT-8080}"
+    OIDC_ISSUER="${OIDC_ISSUER}"
+    OIDC_CLIENT_ID="${OIDC_CLIENT_ID}"
+    OIDC_NAME="${OIDC_NAME-OpenIDConnect}"
+    echo "
+    {
+      \"server\": {
+        \"port\": $PORT
+      },
+      \"authentication\": {
+        \"openid_providers\": [
+          {
+            \"issuer\": \"$OIDC_ISSUER\",
+            \"client_id\": \"$OIDC_CLIENT_ID\",
+            \"display_name\": \"$OIDC_NAME\"
+          }
+        ]
+      }
+    }
+    " >> /root/.config/quasar/quasar-config.json
+fi
+
+set -e
+
 # Initialise Advanced Metastore if required
 if [ ! -e /root/.config/quasar/quasar-metastore.db.mv.db ]; then
   [ -z "$ADMIN_GROUP" ] && { echo "Need to set ADMIN_GROUP"; exit 1; }
