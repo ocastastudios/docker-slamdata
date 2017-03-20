@@ -13,8 +13,8 @@ RUN apt-get update && apt-get upgrade -y && \
 
 ENV QUASAR_VERSION="14.6.33"
 RUN cd slamdata && \
-    wget -O quasar.jar -q https://github.com/quasar-analytics/quasar/releases/tag/v${QUASAR_VERSION}-quasar-web/quasar-web-assembly-${QUASAR_VERSION}.jar && \
-    wget -O quasar-repl.jar -q https://github.com/quasar-analytics/quasar/releases/tag/v${QUASAR_VERSION}-quasar-repl/quasar-repl-assembly-${QUASAR_VERSION}.jar
+    wget -O quasar.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-web/quasar-web-assembly-${QUASAR_VERSION}.jar && \
+    wget -O quasar-repl.jar -q https://github.com/quasar-analytics/quasar/releases/download/v${QUASAR_VERSION}-quasar-repl/quasar-repl-assembly-${QUASAR_VERSION}.jar
 ADD run.sh /run.sh
 ADD run-advanced.sh /run-advanced.sh
 RUN chmod a+x /run.sh && chmod a+x /run-advanced.sh
