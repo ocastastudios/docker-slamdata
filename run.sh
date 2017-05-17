@@ -24,10 +24,11 @@ if [ ! -e /root/.config/quasar/quasar-config.json ]; then
       }
     }
     " >> /root/.config/quasar/quasar-config.json
+    java -jar /slamdata/quasar.jar initUpdateMetaStore --content-path /slamdata/public
 fi
 
 
 
 export _JAVA_OPTIONS="${JAVA_OPTIONS:="-Xms1G -Xmx4G"} $SD_OPTS"
 
-java -jar /slamdata/quasar.jar --content-path /slamdata/public
+java -jar /slamdata/quasar.jar --content-path /slamdata/public 
