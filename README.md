@@ -1,85 +1,24 @@
-# SlamData Community Edition Docker Image
+# README #
 
-Builds a Docker image for the [SlamData](http://slamdata.com)  NOSQL analytics Tool (Community Edition). 
+As of Slamdata 4.2.6 this image is built from the Slamdata 30 day trial download. 
+The community edition appears to be no longer available.
 
-There are three environment variables that can be used to configure the image.
+This image can be used to run a trail instance of Slamdata or a full Slamdata instance if you have a full license. 
 
-__PORT__
-The TCP port that the SlamData server is available on. Defaults to _8080_
-
-__CONNECTION_NAME__
-The name of the preconfigured SlamData MongoDB connection. Defaults to _MongoDB_
-
-__CONNECTION_URI__
-The MongoDB connection string to be used for the initial connection. Defaults to _mongodb://mongodb:27017_
-
-This is not an official image.
+It is recommended you mount /root/.config/quasar/ as a named volume to persist configuration data.
 
 
-# Run SlamData
+#### Environment Variables ####
 
-```bash
-docker run -d \
-           -e CONNECTION_NAME="my_connection_name" \
-           -e CONNECTION_URI="mongodb://user:pass@mongo:27017/admin" \
-           -p 0.0.0.0:80:8080 \
-           ocasta/slamdata
-```
+The image contains a script file that automatically creates an initial configuration from the following environment variables.
 
-## Run it preserving quasar config data 
+ - PORT: The port number that Slamdata will run on
+ - ADMIN_GROUP: The name of the initial admin group
+ - ADMIN_USERS: A comma separated list of usernames to belong to the admin group
+ - OIDC_CLIENT_ID, OIDC_ISSUER, OIDC_NAME: OpenID connect configuration values
+ - SD_OPTS: License key values to pass to the Java command that starts Slamdata. [See Slamdata docs for full details](http://docs.slamdata.com/en/latest/administration-guide.html)
+ 
+#### Supported tags ####
 
-Preserve quasar configuration and data by mounting the destination dir `/root/.config/quasar` from your host, data container...
-
-Example: 
-
-Create the dir `/root/slamdata/` in your host and run the container:
-
- ```bash
-docker run -d \
-           -e CONNECTION_NAME="my_connection_name" \
-           -e CONNECTION_URI="mongodb://user:pass@mongo:27017/admin" \
-           -v /root/slamdata:/root/.config/quasar
-           -p 0.0.0.0:80:8080 \
-           ocasta/slamdata
-```
-
-## Running Slam Advanced Edition
-
-For obvious reasons, this image does not contain the necessary Quasar file to run Slamdata Advanced Edition. 
-However if you have paid for the Advanced edition it is possible to run it with this image. 
-
-- First download and unzip the Slamdata Advanced edition installer
-- Make sure the quasar.jar file from this to somewhere the docker container will be able to access it
-- Create a quasar config file with the OIDC provider configuration as in the Slamdata documentation
-- Run the docker container as follows. Assuming the _quasar-config.json_ is in _/root/slamdata_ and Slamdata Advanced was 
-  unzipped in _/slamdata-advanced_ the docker command would be:
-
- ```bash
-docker run -d \
-           -e ADMIN_GROUP="myAdminGroup" \
-           -e ADMIN_USERS="adminuser1@myodic.com,adminuser2@myoidc.com" \
-           -e SD_OPTS="-D..." |
-           -v /root/slamdata:/root/.config/quasar |
-           -v /slamdata-advanced:/slamdata |
-           -p 0.0.0.0:80:8080 \
-           ocasta/slamdata run-advanced.sh
-```
-
-where *SD_OPTS* is the Advanced edition licence parameters detailed in the Slam Documentation.
-
-This will also write the H2 metastore to the /root/slamdata directory thus ensuring its continued existence between 
- container updates.
-
-# Quasar REPL
-
-The Quasar REPL jar file is included in the image although not required by Slamdata as it's so darn useful
-You can fire up REPL in a running container using the same configuration as Slamdata. e.g.
-
-    docker exec -it slamdata_container bash -c "java -jar slamdata/quasar-repl-assembly.jar -c /root/.config/quasar/quasar-config.json"
-    
-# Supported tags
-
-* `latest`,`4.0` The most recent version of SlamData Community Edition v4.0
-* `3.0.x` Specific versions of SlamData Community Edition v3.0
-* `4.0.x` Specific versions of SlamData Community Edition v4.0
-
+* `latest`,`4.2` The most recent version of SlamData v4.2
+* `4.2.x` Specific versions of SlamData v4.2

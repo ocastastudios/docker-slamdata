@@ -7,28 +7,35 @@ if [ ! -e /root/.config/quasar/quasar-config.json ]; then
     echo >&2 'info: create quasar-config.json'
 
     PORT="${PORT-8080}"
-    CONNECTION_NAME="${CONNECTION_NAME-MongoDB}"
-    CONNECTION_URI="${CONNECTION_URI-mongodb://mongodb:27017}"
-
+    OIDC_ISSUER="${OIDC_ISSUER}"
+    OIDC_CLIENT_ID="${OIDC_CLIENT_ID}"
+    OIDC_NAME="${OIDC_NAME-OpenIDConnect}"
     echo "
     {
       \"server\": {
         \"port\": $PORT
       },
-      \"mountings\": {
-        \"/$CONNECTION_NAME/\": {
-          \"mongodb\": {
-            \"connectionUri\": \"$CONNECTION_URI\"
+      \"authentication\": {
+        \"openid_providers\": [
+          {
+            \"issuer\": \"$OIDC_ISSUER\",
+            \"client_id\": \"$OIDC_CLIENT_ID\",
+            \"display_name\": \"$OIDC_NAME\"
           }
-        }
+        ]
       }
     }
     " >> /root/.config/quasar/quasar-config.json
-    java -jar /slamdata/quasar.jar initUpdateMetaStore --content-path /slamdata/public
 fi
 
+set -e
 
+export _JAVA_OPTIONS="${JAVA_OPTIONS:="-Xms1G -Xmx4G "} $SD_OPTS"
 
-export _JAVA_OPTIONS="${JAVA_OPTIONS:="-Xms1G -Xmx4G"} $SD_OPTS"
-
-java -jar /slamdata/quasar.jar --content-path /slamdata/public 
+# Initialise Advanced Metastore if required
+if [ ! -e /root/.config/quasar/quasar-metastore.db.mv.db ]; then
+  [ -z "$ADMIN_GROUP" ] && { echo "Need to set ADMIN_GROUP"; exit 1; }
+  [ -z "$ADMIN_USERS" ] && { echo "Need to set ADMIN_USERS"; exit 1; }
+  java -jar /slamdata-backend.jar bootstrap --admin-group $ADMIN_GROUP --admin-users $ADMIN_USERS
+fi
+java -server -jar /slamdata-backend.jar --content-path /public
